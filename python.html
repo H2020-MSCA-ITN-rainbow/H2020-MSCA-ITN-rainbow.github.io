@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="styles.css" />
+  <title>H2020-MSCA-ITN-rainbow</title>
+</head>
+<body>
+  <div class="header">
+    <a href="index.html"> GRIT</a>
+  </div>
+  <div class="topnav">
+    <a href="about.html">About Grit</a>
+    <a href="download.html">Download</a>
+    <a href="install.html">Install</a>
+    <a href="python.html">Python interface</a>
+    <a href="tutorials.html">Tutorials</a>
+  </div>
+
+<div class="main">
+  <p>
+    To make GRIT accessible for those who are more comfortable writing Python code, we provide the following interface which contains the necessary classes and functions to recreate the existing C++ demos. The GRIT source code also includes Python versions of a subset of the C++ demos, these can be found in the 'GRIT/GRIT/bin' folder.
+  </p>
+  <h2>Classes and member functions</h2>
+  <div class="code_inline">
+    <h3>ConfigFile()</h3>
+    load(file_name,trow_on_errors=true)</br>
+    exist()</br>
+    clear()</br>
+    get_value(name)</br>
+    get_value(name,default_value)</br>
+    get_value(operation_name,label_value,parameter_name)</br>
+    get_value(operation_name,label_value,parameter_name,default_value)</br>
+  </div>
+
+  example:</br>
+  <div class="code_snippet">
+    import pygrit as GRIT</br>
+
+    ...</br>
+    cfg_filename = '../bin/my_cfg_file.cfg'</br>
+    settings = GRIT.ConfigFile()</br>
+    settings.load(cfg_filename)</br>
+    settings.get_value('txt_filename', 'example.txt')</br>
+    settings.get_value('steps', '100')</br>
+  </div>
+
+
+  <div class="code_inline">
+    <h3>Parameters()</h3>
+    number_of_subdomains</br>
+    number_of_subdomains</br>
+    set_upper_threshold_attribute(name, value)</br>
+    set_lower_threshold_attribute(name, value)</br>
+  </div>
+  <div class="code_snippet">
+    import pygrit as GRIT</br>
+
+    ...</br>
+    cfg_filename = '../bin/tutorial_contact.cfg'</br>
+    settings = GRIT.ConfigFile()</br>
+    settings.load(cfg_filename)</br>
+    parameters = GRIT.make_parameters_from_config_file(settings)</br>
+    parameters.set_lower_threshold_attribute('refinement',           refinement_attribute_name)</br>
+    parameters.set_lower_threshold_attribute('interface_refinement', refinement_attribute_name)</br>
+    parameters.set_upper_threshold_attribute('coarsening',           coarsening_attribute_name)</br>
+    parameters.set_upper_threshold_attribute('interface_coarsening', coarsening_attribute_name)</br>
+  </div>
+
+
+  <div class="code_inline">
+    <h3>Engine2D()</h3>
+    update(parameters)</br>
+    create_attribute(name, dimension)</br>
+    get_all_simplices()</br>
+    in_phase(label, simplex0)</br>
+    in_phase(label, simplex1)</br>
+    in_phase(label, simplex2)</br>
+    is_dimension(label, simplex0)</br>
+    is_dimension(label, simplex1)</br>
+    is_dimension(label, simplex2)</br>
+    filter(simplex_set, module_name, condition_name, info)</br>
+  </div>
+
+  example:</br>
+  <div class="code_snippet">
+    import pygrit as GRIT</br>
+
+    ...</br>
+    cfg_filename = '../bin/tutorial_vortex_in_a_box.cfg'</br>
+
+    settings = GRIT.ConfigFile()</br>
+    settings.load(cfg_filename)</br>
+
+    parameters = GRIT.make_parameters_from_config_file(settings)</br>
+
+    engine = GRIT.Engine2D()</br>
+
+    engine.update(parameters)</br>
+
+    refinement_attribute_name = 'my_refinement_values'</br>
+    engine.create_attribute(refinement_attribute_name, 1)</br>
+    all = engine.get_all_simplices()</br>
+    ...</br>
+    class Info:</br>
+    &nbsp; label1 = north_object_label</br>
+    &nbsp; label2 = south_object_label</br>
+    def is_contact_surface(engine, simplex, info):</br>
+    &nbsp;    if engine.is_dimension(1,simplex) or engine.is_dimension(0,simplex):</br>
+    &nbsp;&nbsp;        return engine.in_phase(info.label1,simplex) and engine.in_phase(info.label2,simplex)</br>
+    contact = engine.filter(all,__name__,'is_contact_surface',Info())</br>
+
+  </div>
+
+  <div class="code_inline">
+
+
+    <h3>Simplex0()</h3></br>
+    <h3>Simplex1()</h3></br>
+    <h3>Simplex2()</h3></br>
+
+  </div>
+
+  <h2>Utility functions</h2>
+  <div class="code_inline">
+
+    get_data_file_path(file_name)</br>
+    generate_filename(prefix, frame, extension)</br>
+    make_parameters_from_config_file(config_file)</br>
+    init_engine_with_mesh_file(file_name, parameters, engine)</br>
+    svg_draw(file_name, engine, parameters, attribute_name_x='current', attribute_name_y='current')</br>
+    make_phase(engine, label)</br>
+    make_phase(engine, simplexset)</br>
+    get_sub_range(engine, phase, name, values, vertex_attribute)</br>
+    get_sub_range(engine, phase, name, values, edge_attribute)</br>
+    get_sub_range(engine, phase, name, values, face_attribute)</br>
+    get_sub_range_current(engine, phase, x, y)</br>
+    get_sub_range_target(engine, phase, x, y)</br>
+    set_sub_range(engine, phase, name, values, vertex_attribute)</br>
+    set_sub_range(engine, phase, name, values, edge_attribute)</br>
+    set_sub_range(engine, phase, name, values, face_attribute)</br>
+    set_sub_range_current()</br>
+    set_sub_range_target(engine, phase, x, y, using_partial_data=false)</br>
+    clear_attribute(engine, name, value, vertex_attribute)</br>
+    clear_attribute(engine, name, value, edge_attribute)</br>
+    clear_attribute(engine, name, value, face_attribute)</br>
+  </div>
+
+
+</div>
+</body>
+</html>

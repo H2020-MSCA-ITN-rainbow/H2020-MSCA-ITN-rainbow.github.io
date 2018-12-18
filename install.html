@@ -1,129 +1,236 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="styles.css" />
-    <title>H2020-MSCA-ITN-rainbow</title>
-  </head>
-  <body>
-    <div class="header">
-      <a href="index.html"> GRIT</a>
+<head>
+  <link rel="stylesheet" href="styles.css" />
+  <title>H2020-MSCA-ITN-rainbow</title>
+</head>
+<body>
+  <div class="header">
+    <a href="index.html"> GRIT</a>
+  </div>
+
+  <div class="topnav">
+    <a href="about.html">About Grit</a>
+    <a href="download.html">Download</a>
+    <a href="install.html">Install</a>
+    <a href="python.html">Python interface</a>
+    <a href="tutorials.html">Tutorials</a>
+  </div>
+
+  <div class="main">
+    <h2>Installing GRIT</h2>
+    <p>
+      To install GRIT, you first need to <a href="download.html">download</a> the source code. We use <a href="https://cmake.org/">CMake</a> to generate project files, so if you do not have CMake installed already, you need to do so before continuing.
+    </p>
+    <p>
+      GRIT has a number of dependencies, which we divide in two categories: external and bundled. External dependencies need to be installed on your system <b>before</b> you can generate your project files. Bundled dependencies are included with the source code in the folder
+      3RDPARTY, and work "out of the box".
+    </p>
+    <h3>External dependencies</h3>
+    <ul>
+      <li>
+        <p><a href="https://www.boost.org/">Boost</a>: Unit-tests in GRIT are written using the Boost unit test framework. This means you need to make sure your boost installation will install the binaries from Boost that supports this framework</p>
+      </li>
+      <li>
+        <p><a href="https://developer.nvidia.com/cuda-toolkit">NVIDIA CUDA Toolkit</a>: Some simulators (not all) use CUSP to solve linear systems. CUSP requires NVIDIA CUDA Toolkit. The CUSP version used by GRIT is bundled with 3RDPARTY. If you do not install CUDA, make sure that the ENABLE_CUDA parameter in CMake is set to 0 (this should be the default value).  </p>
+      </li>
+    </ul>
+    <h3>Bundled dependencies</h3>
+    <ul>
+      <li>
+        <p><a href="https://github.com/erleben/OpenTissue">OpenTissue</a>: used for the underlying mesh structure</p>
+      </li>
+      <li>
+        <p><a href="https://cusplibrary.github.io/md_quickstart.html">CUSP</a>: a template library for sparse matrix computations, used in a subset of the simulators in GRIT</p>
+      </body>
+    </li>
+  </ul>
+  <h3>CMake</h3>
+  <p>
+    The following walkthrough assumes the use of cmake-gui, the grafical interface to CMake.
+  </p>
+  <h4>step 1</h4>
+  <p>Point CMake to the folder where the source is located. In this example, GRIT-master is the folder the source code has been cloned to. This folder contains three folders: 3RDPARTY, GRIT, and UTILITIES, and a handful of information files of various formats. The folder we need to point CMake to, is the GRIT folder.</p>
+  <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="imgs/01_cmake_source_rep.png">
+        <img src="imgs/01_cmake_source_rep.png" alt="Add source path to CMake" width="600" height="400">
+      </a>
+      <div class="desc">Set source folder</div>
     </div>
+  </div>
+  <h4>step 2</h4>
+  <p>
+    Let CMake know where to build the project binaries. CMake needs to know where to place all the files it generates for the project, in this example we tell CMake to create a folder called 'build' in the GRIT folder. If the specified folder does not already exist, CMake asks if you want to create it, click 'Yes'.
+  </p>
+  <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="imgs/02_cmake_build_rep.png">
+        <img src="imgs/02_cmake_build_rep.png" alt="Add build path to CMake" width="600" height="400">
+      </a>
+      <div class="desc">Set build folder</div>
+    </div>
+  </div>
 
-<div class="topnav">
-  <a href="about.html">About Grit</a>
-  <a href="download.html">Download</a>
-  <a href="install.html">Install</a>
-  <a href="python.html">Python interface</a>
-  <a href="tutorials.html">Tutorials</a>
-</div>
+  <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="imgs/03_build_doesnt_exist.png">
+        <img src="imgs/03_build_doesnt_exist.png" alt="Build repository does not exist, create new?" width="600" height="400">
+      </a>
+      <div class="desc">Let CMake create build folder</div>
+    </div>
+  </div>
+  <h4>step 3</h4>
+  <p>
+    CMake can create project files for a number of IDEs, choose the one that you prefer to work with. In this example, Xcode is chosen.
+  </p>
+  <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="imgs/04_specify_generator.png">
+        <img src="imgs/04_specify_generator.png" alt="Specify project generator" width="600" height="400">
+      </a>
+      <div class="desc">Specify project generator</div>
+    </div>
+  </div>
+  <h4>step 4</h4>
+  <p>
+    To configure your project, you hit the 'Configure' button. This makes CMake go through all your CMake scripts (called CMakeLists.txt) and generates a platform specific build script. A list is generated where you can see all the variables CMake has created, and their current values.
+  </p>
+  <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="imgs/06_configure_first.png">
+        <img src="imgs/06_configure_first.png" alt="Configure your project, round 1" width="600" height="400">
+      </a>
+      <div class="desc">Configure your project</div>
+    </div>
+  </div>
+  <p>
+    Inspect the output window (bottom window) for any issues, this is where you will see whether CMake was able to find all the dependencies. You can change the values of the CMake variables, for instance you can help by adding any paths that CMake was not able to resolve. You can also enable/disable project settings, such as the 'ENABLE_CUDA' variable. When all issues are resolved and you are happy with the settings, hit 'Configure' again.
+  </p>
+  <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="imgs/07_configure_second.png">
+        <img src="imgs/07_configure_second.png" alt="Configure your project, round two" width="600" height="400">
+      </a>
+      <div class="desc">Resolve issues, and configure again</div>
+    </div>
+  </div>
+  <h4>step 4</h4>
+  The last CMake step is to generate the project file, hit 'Generate'.
+  <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="imgs/08_generate.png">
+        <img src="imgs/08_generate.png" alt="Generate project" width="600" height="400">
+      </a>
+      <div class="desc">Generate project file</div>
+    </div>
+  </div>
+  <h2>Building and running demo code</h2>
+  <h3>XCode</h3>
 
-<div class="main">
-<h2>Installing GRIT</h2>
-<p>
-To install GRIT, you first need to <a href="download.html">download</a> the source code. We use <a href="https://cmake.org/">CMake</a> to generate project files, so if you do not have CMake installed already, you need to do so before continuing.
-</p>
-<p>
-  GRIT has a number of dependencies, which we divide in two categories: external and bundled. External dependencies need to be installed on your system <b>before</b> you can generate your project files. Bundled dependencies are included with the source code in the folder
-  3RDPARTY, and work "out of the box".
-</p>
-<h3>External dependencies</h3>
-<ul>
-  <li>
-    <p><a href="https://www.boost.org/">Boost</a>: Unit-tests in GRIT are written using the Boost unit test framework. This means you need to make sure your boost installation will install the binaries from Boost that supports this framework</p>
-  </li>
-  <li>
-    <p><a href="https://developer.nvidia.com/cuda-toolkit">NVIDIA CUDA Toolkit</a>: Some simulators (not all) use CUSP to solve linear systems. CUSP requires NVIDIA CUDA Toolkit. The CUSP version used by GRIT is bundled with 3RDPARTY. If you do not install CUDA, make sure that the ENABLE_CUDA parameter in CMake is set to 0 (this should be the default value).  </p>
-  </li>
-</ul>
-<h3>Bundled dependencies</h3>
-<ul>
-  <li>
-    <p><a href="https://github.com/erleben/OpenTissue">OpenTissue</a>: used for the underlying mesh structure</p>
-  </li>
-  <li>
-    <p><a href="https://cusplibrary.github.io/md_quickstart.html">CUSP</a>: a template library for sparse matrix computations, used in a subset of the simulators in GRIT</p>
-</body>
-  </li>
-</ul>
-<h3>CMake</h3>
-<p>
-  The following walkthrough assumes the use of cmake-gui, the grafical interface to CMake.
-</p>
-<h4>step 1</h4>
-<p>Point CMake to the folder where the source is located. In this example, GRIT-master is the folder the source code has been cloned to. This folder contains three folders: 3RDPARTY, GRIT, and UTILITIES, and a handful of information files of various formats. The folder we need to point CMake to, is the GRIT folder.</p>
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="imgs/01_cmake_source_rep.png">
-      <img src="imgs/01_cmake_source_rep.png" alt="Add source path to CMake" width="600" height="400">
-    </a>
-    <div class="desc">Set source folder</div>
+  <iframe allowfullscreen="allowfullscreen"
+        mozallowfullscreen="mozallowfullscreen"
+        msallowfullscreen="msallowfullscreen"
+        oallowfullscreen="oallowfullscreen"
+        webkitallowfullscreen="webkitallowfullscreen"
+        width="480" height="300" src="https://www.youtube.com/embed/r6u0mVW7tlQ">
+  </iframe>
+  <h3>Unix Makefiles</h3>
+  <p>
+    To run the code without using an IDE, you can have CMake generate Unix Makefiles instead.
+  </p>
+  <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="imgs/install/unix_makefile/cmake_unix.png">
+        <img src="imgs/install/unix_makefile/cmake_unix.png" alt="Generate Unix Makefiles" width="600" height="400">
+      </a>
+      <div class="desc">Generate Unix Makefiles</div>
+    </div>
   </div>
-</div>
-<h4>step 2</h4>
-<p>
-  Let CMake know where to build the project binaries. CMake needs to know where to place all the files it generates for the project, in this example we tell CMake to create a folder called 'build' in the GRIT folder. If the specified folder does not already exist, CMake asks if you want to create it, click 'Yes'.
-</p>
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="imgs/02_cmake_build_rep.png">
-      <img src="imgs/02_cmake_build_rep.png" alt="Add build path to CMake" width="600" height="400">
-    </a>
-    <div class="desc">Set build folder</div>
+  <p>
+    Go to the build folder you specified in the CMake configuration step, in this example it is the folder 'GRIT/buildMAKE'
+  </p>
+  <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="imgs/install/unix_makefile/after_cmake.png">
+        <img src="imgs/install/unix_makefile/after_cmake.png" alt="Go to build folder" width="600" height="400">
+      </a>
+      <div class="desc">Go to build folder</div>
+    </div>
   </div>
-</div>
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="imgs/03_build_doesnt_exist.png">
-      <img src="imgs/03_build_doesnt_exist.png" alt="Build repository does not exist, create new?" width="600" height="400">
-    </a>
-    <div class="desc">Let CMake create build folder</div>
+  <p>
+    CMake has generated a lot of files in this folder, the one we are interested in is the 'Makefile'
+  </p>
+  <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="imgs/install/unix_makefile/content_of_build.png">
+        <img src="imgs/install/unix_makefile/content_of_build.png" alt="Content of the build folder created by CMake" width="600" height="400">
+      </a>
+      <div class="desc">Content of the build folder</div>
+    </div>
   </div>
-</div>
-<h4>step 3</h4>
-<p>
-  CMake can create project files for a number of IDEs, choose the one that you prefer to work with. In this example, Xcode is chosen.
-</p>
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="imgs/04_specify_generator.png">
-      <img src="imgs/04_specify_generator.png" alt="Specify project generator" width="600" height="400">
-    </a>
-    <div class="desc">Specify project generator</div>
+  <p>
+    To see which targets can be build using the generated Makefile, use the command 'make help'.
+  </p>
+  <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="imgs/install/unix_makefile/make_help.png">
+        <img src="imgs/install/unix_makefile/make_help.png" alt="List all targets" width="600" height="400">
+      </a>
+      <div class="desc">List all targets</div>
+    </div>
   </div>
-</div>
-<h4>step 4</h4>
-<p>
-  To configure your project, you hit the 'Configure' button. This makes CMake go through all your CMake scripts (called CMakeLists.txt) and generates a platform specific build script. A list is generated where you can see all the variables CMake has created, and their current values.
-</p>
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="imgs/06_configure_first.png">
-      <img src="imgs/06_configure_first.png" alt="Configure your project, round 1" width="600" height="400">
-    </a>
-    <div class="desc">Configure your project</div>
+  <p>
+    To build all targets, use the command 'make all'.
+  </p>
+  <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="imgs/install/unix_makefile/make_all.png">
+        <img src="imgs/install/unix_makefile/make_all.png" alt="Build all targets" width="600" height="400">
+      </a>
+      <div class="desc">Build all targets</div>
+    </div>
   </div>
-</div>
-<p>
-  Inspect the output window (bottom window) for any issues, this is where you will see whether CMake was able to find all the dependencies. You can change the values of the CMake variables, for instance you can help by adding any paths that CMake was not able to resolve. You can also enable/disable project settings, such as the 'ENABLE_CUDA' variable. When all issues are resolved and you are happy with the settings, hit 'Configure' again.
-</p>
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="imgs/07_configure_second.png">
-      <img src="imgs/07_configure_second.png" alt="Configure your project, round two" width="600" height="400">
-    </a>
-    <div class="desc">Resolve issues, and configure again</div>
+  <p>
+    Now all targets have been built, and all the binaries can be found in the 'GRIT/bin' folder.
+  </p>
+  <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="imgs/install/unix_makefile/content_of_bin.png">
+        <img src="imgs/install/unix_makefile/content_of_bin.png" alt="Binaries in the 'bin' folder" width="600" height="400">
+      </a>
+      <div class="desc">Binaries in the 'bin' folder</div>
+    </div>
   </div>
-</div>
-<h4>step 4</h4>
-The last CMake step is to generate the project file, hit 'Generate'.
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="iimgs/08_generate.png">
-      <img src="imgs/08_generate.png" alt="Generate project" width="600" height="400">
-    </a>
-    <div class="desc">Generate project file</div>
+  <p>
+    To run the demo_tutorial_contacts binary, navigate to the 'bin' folder and use the command './demo_tutorial_contact'. Note that there is no other output than the text to the terminal, and the images being written to file in the 'bin/output' folder.
+  </p>
+  <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="imgs/install/unix_makefile/demo_running.png">
+        <img src="imgs/install/unix_makefile/demo_running.png" alt="Demo binary running" width="600" height="400">
+      </a>
+      <div class="desc">Demo binary running</div>
+    </div>
   </div>
-</div>
+  <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="imgs/install/unix_makefile/demo_done.png">
+        <img src="imgs/install/unix_makefile/demo_done.png" alt="Demo binary done" width="600" height="400">
+      </a>
+      <div class="desc">Demo binary done</div>
+    </div>
+  </div>
+  <p>
+    Navigate to the 'GRIT/bin/output' folder to see the results of the demo. Each simulated frame is saved as an SVG file.
+  </p>
+  <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="imgs/install/unix_makefile/ls_output.png">
+        <img src="imgs/install/unix_makefile/ls_output.png" alt="Content of the 'output' folder" width="600" height="400">
+      </a>
+      <div class="desc">Content of the 'output' folder</div>
+    </div>
+  </div>
 </div>
 </html>

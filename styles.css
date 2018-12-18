@@ -62,8 +62,11 @@ body {
 .code_snippet{
   padding: 20px;
   font-family: courier;
+  color: green;
   display: block;
   background: white;
+  line-height: 1.7;
+
 }
 .main{
   text-align: left;

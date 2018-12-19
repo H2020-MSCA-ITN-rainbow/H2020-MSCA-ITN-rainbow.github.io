@@ -25,16 +25,9 @@ body {
 .topnav {
   overflow: hidden;
   background-color: #333;
-}
-
-/* Style the topnav links */
-.topnav a {
-  float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
 }
 
 /* Change color on hover */
@@ -45,6 +38,33 @@ body {
 
 .topnav li {
   float: left;
+}
+
+.topnav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.topnav li a:hover:not(.active) {
+  background-color: green;
+  color: white
+}
+
+.topnav li a.active {
+  color: #7baf46;
+  font-weight: bold;
+  text-decoration: underline;
 }
 
 /* Footer */
@@ -68,15 +88,37 @@ body {
   line-height: 1.7;
 
 }
-.main{
+
+.leftcolumn{
+  padding-top: 10px;
+  float: left;
+  width: 15%;
+}
+
+.leftcolumn a {
+  display: block;
+  background-color: #ddd;
+  color: #111;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.leftcolumn a:hover {
+  color: white;
+  background-color: green;
+}
+
+.main {
   text-align: left;
-  margin-left: 120px;
+  float: left;
+  width: 75%;
+  padding-left: 20px;
 }
 
 p {
-    width: 70%;
-    word-break: break-word;
-
+  width: 70%;
+  word-break: break-word;
 }
 
 div.gallery {
@@ -97,9 +139,29 @@ div.desc {
   text-align: center;
 }
 
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+  .topnav a {
+    float: none;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .leftcolumn, .main {
+    width: 100%;
+    padding: 0;
+  }
+}
 .responsive {
   padding: 0 6px;
-//  float: left;
+  //  float: left;
   width: 24.99999%;
 }
 
@@ -112,20 +174,6 @@ div.desc {
 
 @media only screen and (max-width: 100px) {
   .responsive {
-    width: 100%;
-  }
-}
-
-.clearfix:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
-@media screen and (max-width: 400px) {
-  .topnav a {
-    float: none;
     width: 100%;
   }
 }

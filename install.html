@@ -10,13 +10,30 @@
   </div>
 
   <div class="topnav">
-    <a href="about.html">About Grit</a>
-    <a href="download.html">Download</a>
-    <a href="install.html">Install</a>
-    <a href="python.html">Python interface</a>
-    <a href="tutorials.html">Tutorials</a>
+    <ul>
+      <li>
+        <a href="about.html">About Grit</a>
+      </li>
+      <li>
+        <a href="download.html">Download</a>
+      </li>
+      <li>
+        <a class="active" href="install.html">Install</a>
+      </li>
+      <li>
+        <a href="python.html">Python interface</a>
+      </li>
+      <li>
+        <a href="tutorials.html">Tutorials</a>
+      </li>
+    </ul>
   </div>
-
+<div class="leftcolumn">
+  <a href="#external_depend">External dependencies</a></br>
+  <a href="#bundled_depend">Bundled dependencies</a></br>
+  <a href="#cmake">Setup CMake</a></br>
+  <a href="#building">Building binaries</a></br>
+</div>
   <div class="main">
     <h2>Installing GRIT</h2>
     <p>
@@ -26,6 +43,7 @@
       GRIT has a number of dependencies, which we divide in two categories: external and bundled. External dependencies need to be installed on your system <b>before</b> you can generate your project files. Bundled dependencies are included with the source code in the folder
       3RDPARTY, and work "out of the box".
     </p>
+    <a name="external_depend"></a>
     <h3>External dependencies</h3>
     <ul>
       <li>
@@ -35,6 +53,7 @@
         <p><a href="https://developer.nvidia.com/cuda-toolkit">NVIDIA CUDA Toolkit</a>: Some simulators (not all) use CUSP to solve linear systems. CUSP requires NVIDIA CUDA Toolkit. The CUSP version used by GRIT is bundled with 3RDPARTY. If you do not install CUDA, make sure that the ENABLE_CUDA parameter in CMake is set to 0 (this should be the default value).  </p>
       </li>
     </ul>
+    <a name="bundled_depend"></a>
     <h3>Bundled dependencies</h3>
     <ul>
       <li>
@@ -45,6 +64,7 @@
       </body>
     </li>
   </ul>
+  <a name="cmake"></a>
   <h3>CMake</h3>
   <p>
     The following walkthrough assumes the use of cmake-gui, the grafical interface to CMake.
@@ -53,8 +73,8 @@
   <p>Point CMake to the folder where the source is located. In this example, GRIT-master is the folder the source code has been cloned to. This folder contains three folders: 3RDPARTY, GRIT, and UTILITIES, and a handful of information files of various formats. The folder we need to point CMake to, is the GRIT folder.</p>
   <div class="responsive">
     <div class="gallery">
-      <a target="_blank" href="imgs/01_cmake_source_rep.png">
-        <img src="imgs/01_cmake_source_rep.png" alt="Add source path to CMake" width="600" height="400">
+      <a target="_blank" href="imgs/install/setup_cmake/01_cmake_source_rep.png">
+        <img src="imgs/install/setup_cmake/01_cmake_source_rep.png" alt="Add source path to CMake" width="600" height="400">
       </a>
       <div class="desc">Set source folder</div>
     </div>
@@ -65,8 +85,8 @@
   </p>
   <div class="responsive">
     <div class="gallery">
-      <a target="_blank" href="imgs/02_cmake_build_rep.png">
-        <img src="imgs/02_cmake_build_rep.png" alt="Add build path to CMake" width="600" height="400">
+      <a target="_blank" href="imgs/install/setup_cmake/02_cmake_build_rep.png">
+        <img src="imgs/install/setup_cmake/02_cmake_build_rep.png" alt="Add build path to CMake" width="600" height="400">
       </a>
       <div class="desc">Set build folder</div>
     </div>
@@ -74,8 +94,8 @@
 
   <div class="responsive">
     <div class="gallery">
-      <a target="_blank" href="imgs/03_build_doesnt_exist.png">
-        <img src="imgs/03_build_doesnt_exist.png" alt="Build repository does not exist, create new?" width="600" height="400">
+      <a target="_blank" href="imgs/install/setup_cmake/03_build_doesnt_exist.png">
+        <img src="imgs/install/setup_cmake/03_build_doesnt_exist.png" alt="Build repository does not exist, create new?" width="600" height="400">
       </a>
       <div class="desc">Let CMake create build folder</div>
     </div>
@@ -86,8 +106,8 @@
   </p>
   <div class="responsive">
     <div class="gallery">
-      <a target="_blank" href="imgs/04_specify_generator.png">
-        <img src="imgs/04_specify_generator.png" alt="Specify project generator" width="600" height="400">
+      <a target="_blank" href="imgs/install/setup_cmake/04_specify_generator.png">
+        <img src="imgs/install/setup_cmake/04_specify_generator.png" alt="Specify project generator" width="600" height="400">
       </a>
       <div class="desc">Specify project generator</div>
     </div>
@@ -98,33 +118,37 @@
   </p>
   <div class="responsive">
     <div class="gallery">
-      <a target="_blank" href="imgs/06_configure_first.png">
-        <img src="imgs/06_configure_first.png" alt="Configure your project, round 1" width="600" height="400">
+      <a target="_blank" href="imgs/install/setup_cmake/06_configure_first.png">
+        <img src="imgs/install/setup_cmake/06_configure_first.png" alt="Configure your project, round 1" width="600" height="400">
       </a>
       <div class="desc">Configure your project</div>
     </div>
   </div>
+  <h4>step 5</h4>
   <p>
     Inspect the output window (bottom window) for any issues, this is where you will see whether CMake was able to find all the dependencies. You can change the values of the CMake variables, for instance you can help by adding any paths that CMake was not able to resolve. You can also enable/disable project settings, such as the 'ENABLE_CUDA' variable. When all issues are resolved and you are happy with the settings, hit 'Configure' again.
   </p>
   <div class="responsive">
     <div class="gallery">
-      <a target="_blank" href="imgs/07_configure_second.png">
-        <img src="imgs/07_configure_second.png" alt="Configure your project, round two" width="600" height="400">
+      <a target="_blank" href="imgs/install/setup_cmake/07_configure_second.png">
+        <img src="imgs/install/setup_cmake/07_configure_second.png" alt="Configure your project, round two" width="600" height="400">
       </a>
       <div class="desc">Resolve issues, and configure again</div>
     </div>
   </div>
-  <h4>step 4</h4>
-  The last CMake step is to generate the project file, hit 'Generate'.
+  <h4>step 6</h4>
+  <p>
+    The last CMake step is to generate the project file, hit 'Generate'.
+  </p>
   <div class="responsive">
     <div class="gallery">
-      <a target="_blank" href="imgs/08_generate.png">
-        <img src="imgs/08_generate.png" alt="Generate project" width="600" height="400">
+      <a target="_blank" href="imgs/install/setup_cmake/08_generate.png">
+        <img src="imgs/install/setup_cmake/08_generate.png" alt="Generate project" width="600" height="400">
       </a>
       <div class="desc">Generate project file</div>
     </div>
   </div>
+  <a name="building"></a>
   <h2>Building and running demo code</h2>
   <h3>XCode</h3>
 

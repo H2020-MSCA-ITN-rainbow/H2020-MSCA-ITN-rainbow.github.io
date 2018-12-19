@@ -25,9 +25,6 @@ body {
 .topnav {
   overflow: hidden;
   background-color: #333;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
 }
 
 /* Change color on hover */
@@ -69,10 +66,17 @@ body {
 
 /* Footer */
 .footer {
-  padding: 20px;
-  text-align: center;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  text-align: left;
+  display: block;
   background: #ddd;
   margin-top: 20px;
+  font-size: 12px;
+  overflow: hidden;
+
 }
 
 .code_inline{
@@ -114,6 +118,7 @@ body {
   float: left;
   width: 75%;
   padding-left: 20px;
+  padding-bottom: 50px;
 }
 
 p {

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="styles.css" />
+  <title>H2020-MSCA-ITN-rainbow</title>
+</head>
+<body>
+  <div class="header">
+    <a href="index.html"> GRIT</a>
+  </div>
+  <div class="topnav">
+    <ul>
+      <li>
+        <a href="about.html">About Grit</a>
+      </li>
+      <li>
+        <a href="download.html">Download</a>
+      </li>
+      <li>
+        <a href="install.html">Install</a>
+      </li>
+      <li>
+        <a href="python.html">Python interface</a>
+      </li>
+      <li>
+        <a class="active" href="tutorials.html">Tutorials</a>
+      </li>
+    </ul>
+  </div>
+  <div class="leftcolumn">
+    <a href="#hellopython">'Hello, world'</a></br>
+
+  </div>
+  <div class="main">
+    <h2>Python tutorials</h2>
+    <p>
+      The GRIT project is setup such that all binaries/executables are generated in the 'GRIT/bin' folder, this includes the dynamic library needed to run the Python interface. So when you want to run the example/tutorial code, you need to do so from the bin folder.
+    </p>
+    <a name="hellopython"></a>
+    <h3>A 'Hello, world' example</h3>
+    <p>
+      As is traditional, we will start out with a 'Hallo, world' type of example. First, set up your imports.
+    </p>
+    <div class="code_snippet">
+      import pygrit as GRIT</br>
+      import numpy as np</br>
+      import math</br>
+    </div>
+    <p>
+      Define a main function.
+    </p>
+      <div class="code_snippet">
+        def main():</br>
+        &nbsp; print('My hello pybind')</br>
+        if __name__ == "__main__":</br>
+        &nbsp;main()</br>
+      </div>
+      <p>
+        Save as 'hello.py' and run the script from the 'bin' folder using the command 'python hello.py'.
+      </p>
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="imgs/tutorials/hello_pybind.png">
+            <img src="imgs/tutorials/hello_pybind.png" alt="Run 'hello.py'" width="600" height="400">
+          </a>
+          <div class="desc">Run 'hello.py'</div>
+        </div>
+      </div>
+      <p>
+        GRIT uses configuration files to pass arguments at runtime, so we start out by importing the settings given in 'example.cfg'.
+      </p>
+      <div class="code_snippet">
+        def main():</br>
+        &nbsp; print('My hello pybind')</br>
+
+        &nbsp; cfg_filename = 'example.cfg'</br>
+
+        &nbsp; settings = GRIT.ConfigFile()</br>
+        &nbsp; settings.load(cfg_filename)</br>
+      </div>
+      <p>
+        The setting are loaded in to the 'ConfigFile' object, ready to be used.
+      </p>
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="imgs/tutorials/parse_settings.png">
+            <img src="imgs/tutorials/parse_settings.png" alt="Run 'hello.py', now with settings" width="600" height="400">
+          </a>
+          <div class="desc">Run 'hello.py', now with settings</div>
+        </div>
+      </div>
+      <p>
+        Extract filename from settings, and turn settings into parameters.
+      </p>
+      <div class="code_snippet">
+        ...</br>
+        txt_filename = settings.get_value('txt_filename', 'circle_enright.txt')</br>
+        parameters = GRIT.make_parameters_from_config_file(settings)</br>
+      </div>
+      <p>
+        Now we have what we need to initialize a GRIT engine.
+      </p>
+      <div class="code_snippet">
+        engine = GRIT.Engine2D()</br>
+
+        GRIT.init_engine_with_mesh_file(</br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     GRIT.get_data_file_path(txt_filename)</br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     , parameters</br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     , engine</br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     )</br>
+      </div>
+      <p>
+        A quick look at the output, reveals - as is often the case with 'Hello, world' type examples - at first glance a rather boring result. However, if you get this to work, you are well on your way to making your own GRIT simulations.
+      </p>
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="imgs/tutorials/engine_initialized.png">
+            <img src="imgs/tutorials/engine_initialized.png" alt="Engine up and ready to go" width="600" height="400">
+          </a>
+          <div class="desc">Engine up and ready to go</div>
+        </div>
+      </div>
+      <a name="hellopython"></a>
+      <h3>A 'Hello, world' example</h3>
+</div>
+<div class="footer">
+  <p>
+    <img src="imgs/flag_yellow_high.jpg" alt="European Union flag" style="float:left;height:60px;padding:10px">This project has received funding from the European Union's Horizon 2020 research and innovation programme under the Marie Sklodowska-Curie grant agreement No. 764644. This website only contains the RAINBOW consortium's views and the Research Executive Agency and the Commission are not responsible for any use that may be made of the information it contains.
+  </p>
+</div>
+</body>
+</html>

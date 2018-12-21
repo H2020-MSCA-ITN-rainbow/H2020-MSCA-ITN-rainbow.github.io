@@ -29,6 +29,7 @@
   </div>
   <div class="leftcolumn">
     <a href="#hellopython">'Hello, world'</a></br>
+    <a href="#vortexpython">Vortex in a box</a></br>
 
   </div>
   <div class="main">
@@ -49,84 +50,169 @@
     <p>
       Define a main function.
     </p>
-      <div class="code_snippet">
-        def main():</br>
-        &nbsp; print('My hello pybind')</br>
-        if __name__ == "__main__":</br>
-        &nbsp;main()</br>
+    <div class="code_snippet">
+      def main():</br>
+      &nbsp; print('My hello pybind')</br>
+      if __name__ == "__main__":</br>
+      &nbsp;main()</br>
+    </div>
+    <p>
+      Save as 'hello.py' and run the script from the 'bin' folder using the command 'python hello.py'.
+    </p>
+    <div class="responsive">
+      <div class="gallery">
+        <a target="_blank" href="imgs/tutorials/hello_pybind.png">
+          <img src="imgs/tutorials/hello_pybind.png" alt="Run 'hello.py'" width="600" height="400">
+        </a>
+        <div class="desc">Run 'hello.py'</div>
       </div>
-      <p>
-        Save as 'hello.py' and run the script from the 'bin' folder using the command 'python hello.py'.
-      </p>
-      <div class="responsive">
-        <div class="gallery">
-          <a target="_blank" href="imgs/tutorials/hello_pybind.png">
-            <img src="imgs/tutorials/hello_pybind.png" alt="Run 'hello.py'" width="600" height="400">
-          </a>
-          <div class="desc">Run 'hello.py'</div>
-        </div>
-      </div>
-      <p>
-        GRIT uses configuration files to pass arguments at runtime, so we start out by importing the settings given in 'example.cfg'.
-      </p>
-      <div class="code_snippet">
-        def main():</br>
-        &nbsp; print('My hello pybind')</br>
+    </div>
+    <p>
+      GRIT uses configuration files to pass arguments at runtime, so we start out by importing the settings given in 'example.cfg'.
+    </p>
+    <div class="code_snippet">
+      def main():</br>
+      &nbsp; print('My hello pybind')</br>
 
-        &nbsp; cfg_filename = 'example.cfg'</br>
+      &nbsp; cfg_filename = 'example.cfg'</br>
 
-        &nbsp; settings = GRIT.ConfigFile()</br>
-        &nbsp; settings.load(cfg_filename)</br>
+      &nbsp; settings = GRIT.ConfigFile()</br>
+      &nbsp; settings.load(cfg_filename)</br>
+    </div>
+    <p>
+      The setting are loaded in to the 'ConfigFile' object, ready to be used.
+    </p>
+    <div class="responsive">
+      <div class="gallery">
+        <a target="_blank" href="imgs/tutorials/parse_settings.png">
+          <img src="imgs/tutorials/parse_settings.png" alt="Run 'hello.py', now with settings" width="600" height="400">
+        </a>
+        <div class="desc">Run 'hello.py', now with settings</div>
       </div>
-      <p>
-        The setting are loaded in to the 'ConfigFile' object, ready to be used.
-      </p>
-      <div class="responsive">
-        <div class="gallery">
-          <a target="_blank" href="imgs/tutorials/parse_settings.png">
-            <img src="imgs/tutorials/parse_settings.png" alt="Run 'hello.py', now with settings" width="600" height="400">
-          </a>
-          <div class="desc">Run 'hello.py', now with settings</div>
-        </div>
-      </div>
-      <p>
-        Extract filename from settings, and turn settings into parameters.
-      </p>
-      <div class="code_snippet">
-        ...</br>
-        txt_filename = settings.get_value('txt_filename', 'circle_enright.txt')</br>
-        parameters = GRIT.make_parameters_from_config_file(settings)</br>
-      </div>
-      <p>
-        Now we have what we need to initialize a GRIT engine.
-      </p>
-      <div class="code_snippet">
-        engine = GRIT.Engine2D()</br>
+    </div>
+    <p>
+      Extract filename from settings, and turn settings into parameters.
+    </p>
+    <div class="code_snippet">
+      ...</br>
+      txt_filename = settings.get_value('txt_filename', 'circle_enright.txt')</br>
+      parameters = GRIT.make_parameters_from_config_file(settings)</br>
+    </div>
+    <p>
+      Now we have what we need to initialize a GRIT engine.
+    </p>
+    <div class="code_snippet">
+      engine = GRIT.Engine2D()</br>
 
-        GRIT.init_engine_with_mesh_file(</br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     GRIT.get_data_file_path(txt_filename)</br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     , parameters</br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     , engine</br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     )</br>
+      GRIT.init_engine_with_mesh_file(</br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     GRIT.get_data_file_path(txt_filename)</br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     , parameters</br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     , engine</br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     )</br>
+    </div>
+    <p>
+      A quick look at the output, reveals - as is often the case with 'Hello, world' type examples - at first glance a rather boring result. However, if you get this to work, you are well on your way to making your own GRIT simulations.
+    </p>
+    <div class="responsive">
+      <div class="gallery">
+        <a target="_blank" href="imgs/tutorials/engine_initialized.png">
+          <img src="imgs/tutorials/engine_initialized.png" alt="Engine up and ready to go" width="600" height="400">
+        </a>
+        <div class="desc">Engine up and ready to go</div>
       </div>
-      <p>
-        A quick look at the output, reveals - as is often the case with 'Hello, world' type examples - at first glance a rather boring result. However, if you get this to work, you are well on your way to making your own GRIT simulations.
-      </p>
-      <div class="responsive">
-        <div class="gallery">
-          <a target="_blank" href="imgs/tutorials/engine_initialized.png">
-            <img src="imgs/tutorials/engine_initialized.png" alt="Engine up and ready to go" width="600" height="400">
-          </a>
-          <div class="desc">Engine up and ready to go</div>
-        </div>
-      </div>
-      <a name="hellopython"></a>
-      <h3>A 'Hello, world' example</h3>
-</div>
-<div class="footer">
-  <p>
-    <img src="imgs/flag_yellow_high.jpg" alt="European Union flag" style="float:left;height:60px;padding:10px">This project has received funding from the European Union's Horizon 2020 research and innovation programme under the Marie Sklodowska-Curie grant agreement No. 764644. This website only contains the RAINBOW consortium's views and the Research Executive Agency and the Commission are not responsible for any use that may be made of the information it contains.
-  </p>
-</div>
+    </div>
+    <a name="vortexpython"></a>
+    <h3>Vortex in a box</h3>
+    <p>
+      In its simplest form, a GRIT simulation can be described as a four step process:</br>
+      <ol>
+        <li>Initialize system</li>
+        <li>Do simulation step</li>
+        <li>Update the engine</li>
+        <li>Write simulation result</li>
+      </ol>
+      Repeat steps 2 - 4 as many times as needed.</br>
+      <h4>Initialize</h4>
+      As in the <a href="#hellopython">'Hello, world' example</a>, we start with importing the libraries we need and setting up the variables used to initialize a GRIT engine.
+    </p>
+    <div class="code_snippet">
+      def main():</br>
+      &nbsp; cfg_filename = 'tutorial_vortex_in_a_box.cfg'</br></br>
+      &nbsp; settings = GRIT.ConfigFile()</br>
+      &nbsp; settings.load(cfg_filename)</br></br>
+      &nbsp; parameters = GRIT.make_parameters_from_config_file(settings)</br></br>
+      &nbsp; txt_filename = settings.get_value('txt_filename', 'circle_enright.txt')</br>
+      &nbsp; output_path = settings.get_value('output_path', '')</br>
+      &nbsp; max_steps = int(settings.get_value('steps', '100'))</br></br>
+      &nbsp; engine = GRIT.Engine2D()</br></br>
+
+      &nbsp; GRIT.init_engine_with_mesh_file(</br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      GRIT.get_data_file_path(txt_filename)</br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      , parameters</br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      , engine</br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      )</br>
+    </div>
+    <p>
+      <h4>Simulation step</h4>
+      The simulation step is where the real work is done, let's put that in a separate function to keep the 'main' function clean.</br>
+      The simulation step function takes the engine and the settings object as input. First, all necessary information is extracted from the engine object; the number of vertices in the mesh and the vertices of the mesh. A time step - dt - is set, and a copy of the vertices is made.
+    </p>
+    <div class="code_snippet">
+      def do_simulation_step(engine, settings):</br>
+      &nbsp;object_label = int(settings.get_value('object_label', '1'))</br>
+      &nbsp;phase = GRIT.make_phase(engine, object_label)</br></br>
+
+      &nbsp;N = np.asanyarray(phase.get_vertices()).size</br></br>
+
+      &nbsp;px = np.resize(np.array([]),N)</br>
+      &nbsp;py = np.resize(np.array([]),N)</br>
+
+      &nbsp;GRIT.get_sub_range_current(engine, phase, px, py)</br></br>
+
+      &nbsp;dt = 0.01</br></br>
+
+      &nbsp;px_new = np.array(px)</br>
+      &nbsp;py_new = np.array(py)</br>
+    </div>
+    <p>
+      Next, we add a velocity to the vertices to update their positions and return to the main function.
+    </p>
+    <div class="code_snippet">
+      for i in range(0, N):</br>
+      &nbsp;  x = px[i]</br>
+      &nbsp;  y = py[i]</br>
+      &nbsp;  u = 2.0 * math.cos(math.pi * y) * math.sin(math.pi * y) * math.sin(math.pi*x) * math.sin(math.pi*x)</br>
+      &nbsp;  v = -2.0 * math.cos(math.pi * x) * math.sin(math.pi * x) * math.sin(math.pi*y) * math.sin(math.pi*y)</br>
+      &nbsp;  px_new[i] = px[i] + u*dt</br>
+      &nbsp;  py_new[i] = py[i] + v*dt</br></br>
+      &nbsp;  GRIT.set_sub_range_target(engine, phase, px_new, py_new)
+    </div>
+    <p>
+      Back in the main function, we loop over the number of steps given by the configuration file. Each iteration of the loop repeats steps 2-4, where 'engine.update(parameters)' is the call to GRIT where all the magic happens.
+    </p>
+    <div class="code_snippet">
+      for i in range(1, max_steps):</br>
+      &nbsp;  do_simulation_step(engine, settings)</br>
+      &nbsp;  engine.update(parameters)</br>
+      &nbsp;  write_svg_files(engine, parameters, output_path, i)
+    </div>
+    <p>
+      All that is left to do, is to somehow record the simulation results. In this example - and in the demos in the repository - we write the results to an .svg file using the function 'write_svg_files'. GRIT is not a realtime simulation tool, and so it makes more sense to save the results as files rather than visualizing each frame when it is computed. The implementation of 'write_svg_files' is simple.
+    </p>
+    <div class="code_snippet">
+      def write_svg_files(engine, parameters, output_path, frame_number):</br>
+      &nbsp; filename = output_path + GRIT.generate_filename('/tutorial_vortex_in_a_box', frame_number, 'svg')</br>
+      &nbsp; GRIT.svg_draw(filename, engine, parameters)
+    </div>
+    <p>
+      The full example can be found in the GitHub repository (see <a href="download.html">'Download'</a>) or <a href="examples/tutorial_vortex_python.zip">here</a> as a .zip file.
+    </p>
+  </div><!--end main-->
+
+  <div class="footer">
+    <p>
+      <img src="imgs/flag_yellow_high.jpg" alt="European Union flag" style="float:left;height:60px;padding:10px">This project has received funding from the European Union's Horizon 2020 research and innovation programme under the Marie Sklodowska-Curie grant agreement No. 764644. This website only contains the RAINBOW consortium's views and the Research Executive Agency and the Commission are not responsible for any use that may be made of the information it contains.
+    </p>
+  </div>
 </body>
 </html>
